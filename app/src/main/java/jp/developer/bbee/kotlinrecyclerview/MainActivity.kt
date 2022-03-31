@@ -7,11 +7,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+    private val data: MutableList<ListItem> = setDataList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val data = listOf(
+        startRecyclerView()
+    }
+
+    private fun setDataList(): MutableList<ListItem> {
+        val retList = mutableListOf(
             ListItem(1, "Ryzen 9 5950X", "85800円",
                 "AMD Ryzen 9 5950X without cooler 3.4GHz 16コア / 32スレッド 72MB 105W", ),
             ListItem(2, "Core i9 12900KF", "71800円",
@@ -37,8 +44,11 @@ class MainActivity : AppCompatActivity() {
             ListItem(12, "Core i7 12700", "44000円",
                 "Intel Corei7 プロセッサー 12700K 3.6GHz( 最大 5.0GHz ) 第12世代 LGA 1700 BX8071512700K/A"),
         )
+        return retList
+    }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+    private fun startRecyclerView() {
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.setHasFixedSize(true) // 固定サイズ時のパフォーマンス向上
         recyclerView.layoutManager = LinearLayoutManager(this).apply {
             orientation = LinearLayoutManager.VERTICAL
